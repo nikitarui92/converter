@@ -1,6 +1,8 @@
-FROM node:22-slim
+FROM node:22
 
 WORKDIR /app
+
+ENV PUPPETEER_SKIP_DOWNLOAD=true
 
 COPY package*.json ./
 

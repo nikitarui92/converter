@@ -4,6 +4,8 @@ import multer from 'multer';
 
 const router = express.Router();
 
+const upload = multer({ storage: multer.memoryStorage() });
+
 router.post('/pdf', async (req, res) => {
   const { htmlBase64 } = req.body;
 
@@ -25,8 +27,6 @@ router.post('/pdf', async (req, res) => {
 
   res.setHeaders(headers).send(pdfBuffer);
 });
-
-const upload = multer({ storage: multer.memoryStorage() });
 
 router.post('/pdf/upload', upload.single('html'), async (req, res) => {
   if (!req.file) {
