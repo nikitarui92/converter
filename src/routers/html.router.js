@@ -20,12 +20,11 @@ router.post('/pdf', async (req, res) => {
 
   const now = Date.now();
 
-  const headers = new Headers({
+  res.set({
     'Content-Type': 'application/pdf',
-    'Content-Disposition': `attachment; filename=${now}_document.pdf`,
   });
 
-  res.setHeaders(headers).send(pdfBuffer);
+  res.send(pdfBuffer);
 });
 
 router.post('/pdf/upload', upload.single('html'), async (req, res) => {
@@ -39,7 +38,6 @@ router.post('/pdf/upload', upload.single('html'), async (req, res) => {
   const now = Date.now();
   res.set({
     'Content-Type': 'application/pdf',
-    'Content-Disposition': `attachment; filename=${now}_document.pdf`,
   });
 
   res.send(pdfBuffer);
