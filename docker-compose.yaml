@@ -12,8 +12,7 @@ services:
       BROWSER_WS_ENDPOINT: ws://browser:3000
       BROWSER_TOKEN: ${BROWSER_TOKEN:-local-token}
     depends_on:
-      browser:
-        condition: service_healthy
+      - browser
     restart: unless-stopped
 
   browser:
@@ -21,10 +20,4 @@ services:
     environment:
       TOKEN: ${BROWSER_TOKEN:-local-token}
       CONCURRENT: 2
-      TIMEOUT: 60000
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f \"http://localhost:3000/active?token=$$TOKEN\" || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     restart: unless-stopped
