@@ -17,9 +17,7 @@ router.post('/pdf', async (req, res) => {
 
   const decodedString = Buffer.from(htmlBase64, "base64").toString("utf-8");
   const pdfBuffer = await generateFromHtml(decodedString);
-
-  const now = Date.now();
-
+  
   res.set({
     'Content-Type': 'application/pdf',
   });
@@ -35,7 +33,6 @@ router.post('/pdf/upload', upload.single('html'), async (req, res) => {
   const htmlString = req.file.buffer.toString('utf-8');
   const pdfBuffer = await generateFromHtml(htmlString);
   
-  const now = Date.now();
   res.set({
     'Content-Type': 'application/pdf',
   });
