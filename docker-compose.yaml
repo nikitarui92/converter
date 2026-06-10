@@ -20,4 +20,12 @@ services:
     environment:
       TOKEN: ${BROWSER_TOKEN:-local-token}
       CONCURRENT: 2
+    deploy:
+      resources:
+        limits:
+          cpus: 2
+          memory: 2G
+        reservations:
+          memory: 512M
+    shm_size: 1G
     restart: unless-stopped
